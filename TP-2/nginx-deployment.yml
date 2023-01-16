@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  # modify replicas according to your case
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: mynginx
+  template:
+    metadata:
+      labels:
+        app: mynginx
+    spec:
+      containers:
+      - name: mynginx
+        image: nginx:1.18.0
+        ports:
+          - containerPort: 80
+          
