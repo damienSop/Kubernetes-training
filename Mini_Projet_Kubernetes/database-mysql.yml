@@ -19,12 +19,21 @@ spec:
       - name: database-mysql
         image: mysql:8
         volumeMounts:
-          - name: mysql_data
+          - name: mysql-data
             mountPath: /var/lib/mysql
         ports:
         - name: db-port
-          containerPort: 33060
+          containerPort: 3306
         env:
+          - name: MYSQL_DATABASE
+            value: eazytraining
+          - name: MYSQL_USER
+            value: eazy 
+          - name: MYSQL_PASSWORD 
+            valueFrom:
+              secretKeyRef:
+                name: secret-database 
+                key: mysql_password 
           - name: MYSQL_ROOT_PASSWORD 
             valueFrom:
               secretKeyRef:
@@ -37,7 +46,7 @@ spec:
             
       #Volumes
       volumes:
-        - name: mysql_data
+        - name: mysql-data
           hostPath:
             path: /mysql-data 
 ...

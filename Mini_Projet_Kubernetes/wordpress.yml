@@ -20,12 +20,16 @@ spec:
         image: wordpress:6.1-apache  
         env:
         - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql
+          value: database-svc
+        - name: WORDPRESS_DB_NAME
+          value: eazytraining
+        - name: WORDPRESS_DB_USER
+          value: eazy 
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
               name: secret-database 
-              key: mysql_root_password
+              key: mysql_password
         ports:
         - name: wp-port
           containerPort: 80  

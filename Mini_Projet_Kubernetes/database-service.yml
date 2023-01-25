@@ -11,6 +11,6 @@ spec:
     app:  wordpress
   ports:
   - protocol:  TCP
-    port:  33060
-    targetPort: db-port
+    port:  3306
+    targetPort: 3306
 ...
