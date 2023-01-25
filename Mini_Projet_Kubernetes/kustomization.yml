@@ -1,0 +1,7 @@
+resources:
+  - database-secret.yml
+  - database-mysql.yml 
+  - database-service.yml 
+  - wordpress.yml 
+  - wordpress-service.yml 
+  
