@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-mysql
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress 
+  template:
+    metadata:
+      labels:
+        app: wordpress 
+    spec:
+      containers:
+      - name: database-mysql
+        image: mysql:8
+        volumeMounts:
+          - name: mysql_data
+            mountPath: /var/lib/mysql
+        ports:
+        - name: db-port
+          containerPort: 33060
+        env:
+          - name: MYSQL_ROOT_PASSWORD 
+            valueFrom:
+              secretKeyRef:
+                name: secret-database 
+                key: mysql_root_password
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: "2"
+            
+      #Volumes
+      volumes:
+        - name: mysql_data
+          hostPath:
+            path: /mysql-data 
+...

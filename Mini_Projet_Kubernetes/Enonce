@@ -1,0 +1,8 @@
+Déployez WordPress en suivant les étapes suivantes:
+
+    -   Créez un secret permettant de se connecter à la base de données mysql
+    -   Créez un déployment mysql avec un seul replicat
+    -   Créez un service de type clusterIP pour exposer vos pods mysql
+    -   Créez un deplyment wordpress avec les bonnes variables d'environnement pour se connecter à la base de données mysql
+    -   votre deployment devra stocker les données de wordpress sur un volume mounté dans le /data de votre noeud
+    -   créez un service de type nodePort pour exposer le frontend wordpress
